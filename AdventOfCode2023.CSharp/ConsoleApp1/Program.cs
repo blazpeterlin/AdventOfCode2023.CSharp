@@ -1,4 +1,5 @@
 ﻿using Aoc2023.ActiveDay;
+using System.Diagnostics;
 
 namespace ConsoleApp1
 {
@@ -6,14 +7,15 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            string input =
-                """""
+            string input = File.ReadAllText("input.txt");
 
-                """"";
+            //new RunCompletedDays().RunDay01();
 
             var sln = new Solution();
-            sln.Solve1(input);
-            sln.Solve2(input);
+            int res1 = sln.Solve1(input);
+            //Trace.Assert(res1 == 56397);
+            int res2 = sln.Solve2(input);
+            //Trace.Assert(res2 == 55701);
         }
     }
 }
