@@ -13,9 +13,9 @@ namespace ConsoleApp1
 
             var sln = new Solution();
             int res1 = sln.Solve1(input);
-            //Trace.Assert(res1 == 56397);
+            //Trace.Assert(res1 == 2528);
             int res2 = sln.Solve2(input);
-            //Trace.Assert(res2 == 55701);
+            //Trace.Assert(res2 == 67363);
         }
     }
 }
