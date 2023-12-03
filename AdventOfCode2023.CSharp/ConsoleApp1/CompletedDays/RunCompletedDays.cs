@@ -37,9 +37,9 @@ namespace Aoc2023.ActiveDay.CompletedDays
 
             var sln = new SolutionDay03();
             int res1 = sln.Solve1(input);
-            Trace.Assert(res1 == 2528);
+            Trace.Assert(res1 == 514969);
             int res2 = sln.Solve2(input);
-            Trace.Assert(res2 == 67363);
+            Trace.Assert(res2 == 78915902);
         }
     }
 }

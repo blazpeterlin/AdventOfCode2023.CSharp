@@ -10,7 +10,7 @@ namespace ConsoleApp1
         {
             string input = File.ReadAllText("input.txt");
 
-            new RunCompletedDays().RunDay03();
+            //new RunCompletedDays().RunDay03();
 
             var sln = new Solution();
             int res1 = sln.Solve1(input);

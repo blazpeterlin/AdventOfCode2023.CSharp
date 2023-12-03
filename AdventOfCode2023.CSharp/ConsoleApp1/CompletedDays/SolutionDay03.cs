@@ -40,12 +40,13 @@ namespace Aoc2023.ActiveDay
 
             // (?:^\d)+
             // @"[^\d]+"
-            List<(Pos start, int len, int num)> numsWithLocs = GetLineTokensWithLocations(lns, @"[^\d]+");
+            List<(Pos start, int len, string numStr)> numsWithLocs = GetLineTokensWithLocations(lns, @"(\d+)");
 
             List<int> schematicNums =
                 numsWithLocs.Choose(nwl =>
                 {
-                    var ((start, y), len, num) = nwl;
+                    var ((start, y), len, numStr) = nwl;
+                    int num = int.Parse(numStr);
                     var allPos = Enumerable.Range(start, len).Select(x => (x, y));
                     if (!allPos.Any(symbolPos.Contains)) { return (false, 0); }
 
@@ -69,12 +70,13 @@ namespace Aoc2023.ActiveDay
                 .GroupBy(x => x.expandedPos)
                 .ToDictionary(grp => grp.Key, grp => grp.Select(val => val.origPos).ToList());
 
-            List<(Pos start, int len, int num)> numsWithLocs = GetLineTokensWithLocations(lns, @"[^\d]+");
+            List<(Pos start, int len, string numStr)> numsWithLocs = GetLineTokensWithLocations(lns, @"(\d+)");
 
             List<(Pos gearPos, int num)> numsWithGearPos =
                 numsWithLocs.SelectMany(nwl =>
                 {
-                    var ((start, y), len, num) = nwl;
+                    var ((start, y), len, numStr) = nwl;
+                    int num = int.Parse(numStr);
                     var allPos = Enumerable.Range(start, len).Select(x => (x, y));
 
                     List<Pos> allGearPos = 
@@ -93,7 +95,7 @@ namespace Aoc2023.ActiveDay
             return res;
         }
 
-        private List<(Pos p, int len, int num)> GetLineTokensWithLocations(List<string> lns, string regexSplit)
+        private List<(Pos p, int len, string str)> GetLineTokensWithLocations(List<string> lns, string tokenMatch)
         {
             return
                 lns.Index()
@@ -101,19 +103,13 @@ namespace Aoc2023.ActiveDay
                 {
                     (int y, string ln) = tpl;
 
-                    List<(Pos, int len, int num)> numWithLoc = new();
-                    for (int x = 0; x < ln.Length; x++)
-                    {
-                        if (!Char.IsDigit(ln[x])) { continue; }
+                    List<(Pos, int len, string str)> numWithLoc = 
+                        Regex.Matches(ln, tokenMatch)
+                        .SelectMany(mtch => 
+                            mtch.Captures.Select(cptr => ((cptr.Index, y), cptr.Length, cptr.Value))
+                        )
+                        .ToList();
 
-                        string numStr = Regex.Split(ln.Substring(x), regexSplit).Where(str => str != "").First();
-                        int num = int.Parse(numStr);
-                        int len = num.ToString().Length;
-
-                        numWithLoc.Add(((x, y), len, num));
-
-                        x += len;
-                    }
                     return numWithLoc;
                 }).ToList();
         }
