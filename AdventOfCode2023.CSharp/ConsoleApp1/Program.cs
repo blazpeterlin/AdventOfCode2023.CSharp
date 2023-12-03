@@ -1,4 +1,5 @@
 ﻿using Aoc2023.ActiveDay;
+using Aoc2023.ActiveDay.CompletedDays;
 using System.Diagnostics;
 
 namespace ConsoleApp1
@@ -9,13 +10,13 @@ namespace ConsoleApp1
         {
             string input = File.ReadAllText("input.txt");
 
-            //new RunCompletedDays().RunDay01();
+            new RunCompletedDays().RunDay03();
 
             var sln = new Solution();
             int res1 = sln.Solve1(input);
-            //Trace.Assert(res1 == 2528);
+            Trace.Assert(res1 == 514969);
             int res2 = sln.Solve2(input);
-            //Trace.Assert(res2 == 67363);
+            Trace.Assert(res2 == 78915902);
         }
     }
 }
