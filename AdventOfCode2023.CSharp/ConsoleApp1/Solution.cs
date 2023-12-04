@@ -13,6 +13,7 @@ namespace Aoc2023.ActiveDay
     internal class Solution
     {
         private List<string> SplitToLines(string input) => Regex.Split(input, NewLine).Where(ln => ln != "").ToList();
+        private List<string> Tokenize(string line, IEnumerable<char> splitChars) => line.Split(splitChars.ToArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
 
         public int Solve1(string input)
         {

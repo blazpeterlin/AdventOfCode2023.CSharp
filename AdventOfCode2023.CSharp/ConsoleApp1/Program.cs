@@ -10,13 +10,14 @@ namespace ConsoleApp1
         {
             string input = File.ReadAllText("input.txt");
 
-            //new RunCompletedDays().RunDay03();
+            //new RunCompletedDays().RunDay04();
 
             var sln = new Solution();
             int res1 = sln.Solve1(input);
-            Trace.Assert(res1 == 514969);
+            //Trace.Assert(res1 == 26218);
             int res2 = sln.Solve2(input);
-            Trace.Assert(res2 == 78915902);
+            //Trace.Assert(res2 == 9997537);
+
         }
     }
 }
