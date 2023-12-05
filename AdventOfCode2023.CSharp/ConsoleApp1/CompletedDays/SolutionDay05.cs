@@ -1,4 +1,5 @@
 ﻿using MoreLinq;
+using MoreLinq.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,117 +16,126 @@ namespace Aoc2023.ActiveDay
         private List<string> SplitToLines(string input) => Regex.Split(input, NewLine).Where(ln => ln != "").ToList();
         private List<string> Tokenize(string line, IEnumerable<char> splitChars) => line.Split(splitChars.ToArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
 
-        private (long targetStart, long sourceStart, long len) parseTuple(string ln)
+        record struct Aoc05Range(long Start, long Len)
         {
-            if (ln.Split(" ").Select(long.Parse).ToList() is not [long a, long b, long c]) { throw new(); }
-            return (a, b, c);
+            public long EndExcl => Start + Len;
+            public bool Contains(long num) => num >= Start && num < EndExcl;
+
+            public (Aoc05Range left, Aoc05Range right) SplitAt(long Num)
+            {
+                return (
+                        new Aoc05Range(Start, Num - Start),
+                        new Aoc05Range(Num, EndExcl - Num)
+                    );
+            }
+        }
+
+        record struct Aoc05Mapping(long TargetStart, long SourceStart, long Len)
+        {
+            public Aoc05Range SourceRange => new Aoc05Range(SourceStart, Len);
+            public static Aoc05Mapping Parse(string ln)
+            {
+                if (ln.Split(" ").Select(long.Parse).ToList() is not [long a, long b, long c]) { throw new(); }
+                return new Aoc05Mapping(a, b, c);
+            }
+
+            public long MapUnsafe(long val)
+            {
+                return TargetStart + val - SourceStart;
+            }
+
+
+
+            public Aoc05Range MapRangeUnsafe(Aoc05Range rng)
+            {
+                return new Aoc05Range(MapUnsafe(rng.Start), rng.Len);
+            }
         }
 
         public long Solve1(string input)
         {
             var chunks = Regex.Split(input, NewLine + NewLine).Where(ln => ln != "").ToList();
             var seeds = chunks.First().Split(" ").Skip(1).Select(long.Parse);
-            List<List<(long targetStart, long sourceStart, long len)>> mappings =
+            List<List<Aoc05Mapping>> mappingStages =
                 chunks.Skip(1)
-                .Select(chnk => SplitToLines(chnk).Skip(1).Select(parseTuple).ToList())
+                .Select(chnk => SplitToLines(chnk).Skip(1).Select(Aoc05Mapping.Parse).ToList())
                 .ToList();
 
-            var eventLocations =
+            var seedLocations =
                 seeds
                 .Select(ev => {
                     long tempRes = ev;
-                    foreach (var mapping in mappings)
+                    foreach (var mappingStage in mappingStages)
                     {
-                        foreach(var specificMap in mapping)
-                        {
-                            if (tempRes >= specificMap.sourceStart && tempRes < specificMap.sourceStart + specificMap.len)
-                            {
-                                tempRes = specificMap.targetStart + tempRes - specificMap.sourceStart;
-                                break;
-                            }
-                        }
-
+                        tempRes = mappingStage.FirstOrDefault(mapping => mapping.SourceRange.Contains(tempRes)).MapUnsafe(tempRes);
                     }
                     return tempRes;
                 })
                 .ToList();
 
-            long res = eventLocations.Min();
+            long res = seedLocations.Min();
 
-
-            // not 3200469
             return res;
         }
 
         public long Solve2(string input)
         {
             var chunks = Regex.Split(input, NewLine + NewLine).Where(ln => ln != "").ToList();
-            List<(long rangeStart, long rangeLen)> seedRanges = chunks.First().Split(" ").Skip(1).Select(long.Parse).Chunk(2).Select(chnk => (chnk[0], chnk[1])).ToList();
-            List<List<(long targetStart, long sourceStart, long len)>> mappings =
+            List<Aoc05Range> seedRanges = chunks.First().Split(" ").Skip(1).Select(long.Parse).Chunk(2).Select(chnk => new Aoc05Range(chnk[0], chnk[1])).ToList();
+            List<List<Aoc05Mapping>> mappingStages =
                 chunks.Skip(1)
-                .Select(chnk => SplitToLines(chnk).Skip(1).Select(parseTuple).ToList())
+                .Select(chnk => SplitToLines(chnk).Skip(1).Select(Aoc05Mapping.Parse).ToList())
                 .ToList();
-            //seedRanges = new() { (82, 1) };
 
             var finalRanges =
                 seedRanges
                 .SelectMany(rng => {
-                    List<(long rangeStart, long rangeLen)> tempRanges = new() { rng };
+                    List<Aoc05Range> tempRanges = new() { rng };
 
-                    foreach (var mapping in mappings)
+                    foreach (var mappingStage in mappingStages)
                     {
-                        foreach ((long targetStart, long sourceStart, long len) in mapping)
+                        foreach (Aoc05Mapping mapping in mappingStage)
                         {
                             // split if a range crosses border
-                            tempRanges = SplitRanges(tempRanges, sourceStart, len).ToList();
+                            tempRanges = SplitRanges(tempRanges, mapping).ToList();
                         }
 
-                        tempRanges = tempRanges.Select(rng => MapRange(rng, mapping)).ToList();
+                        tempRanges = tempRanges.Select(rng =>
+                        {
+                            return mappingStage
+                                .FirstOrDefault(mapping => mapping.SourceRange.Contains(rng.Start))
+                                .MapRangeUnsafe(rng);
+                        }).ToList();
                     }
                     return tempRanges;
                 }).ToList();
             
-            long res = finalRanges.Min(fr => fr.rangeStart);
+            long res = finalRanges.Min(fr => fr.Start);
 
-
-            // not 52380323
             return res;
         }
 
-        private (long rangeStart, long rangeLen) MapRange((long rangeStart, long rangeLen) rng, List<(long targetStart, long sourceStart, long len)> mapping)
+        private IEnumerable<Aoc05Range> SplitRanges(List<Aoc05Range> ranges, Aoc05Mapping mapping)
         {
-            foreach (var map in mapping)
+            foreach (Aoc05Range inputRng in ranges)
             {
-                if (rng.rangeStart >= map.sourceStart && rng.rangeStart < map.sourceStart + map.len)
-                {
-                    return (map.targetStart + rng.rangeStart - map.sourceStart, rng.rangeLen);
-                }
-            }
+                Aoc05Range rng = inputRng;
+                var srcRng = mapping.SourceRange;
 
-            return rng;
-        }
-
-        private IEnumerable<(long rangeStart, long rangeLen)> SplitRanges(List<(long rangeStart, long rangeLen)> tempRanges, long sourceStart, long sourceLen)
-        {
-            foreach ((long inpRangeStart, long inpRangeLen) in tempRanges)
-            {
-                var (rangeStart, rangeLen) = (inpRangeStart, inpRangeLen);
-                if (rangeStart < sourceStart && rangeStart + rangeLen > sourceStart)
+                if (rng.Contains(srcRng.Start))
                 {
-                    long newLen = sourceStart - rangeStart;
-                    if (newLen <= 0) { }
-                    yield return (rangeStart, newLen);
-                    (rangeStart, rangeLen) = (sourceStart, rangeLen - newLen);
+                    var (leftRng, rightRng) = rng.SplitAt(srcRng.Start);
+                    yield return leftRng;
+                    rng = rightRng;
                 }
-                if (rangeStart >= sourceStart && rangeStart < sourceStart + sourceLen && rangeStart + rangeLen > sourceStart + sourceLen)
+                if (rng.Contains(srcRng.EndExcl))
                 {
-                    long newLen = sourceStart + sourceLen - rangeStart;
-                    if (newLen <= 0) { }
-                    yield return (rangeStart, newLen);
-                    (rangeStart, rangeLen) = (sourceStart + sourceLen, rangeLen - newLen);
+                    var (leftRng, rightRng) = rng.SplitAt(srcRng.EndExcl);
+                    yield return leftRng;
+                    rng = rightRng;
                 }
                 
-                if (rangeLen > 0) { yield return (rangeStart, rangeLen); }
+                if (srcRng.Len > 0) { yield return rng; }
             }
         }
     }
