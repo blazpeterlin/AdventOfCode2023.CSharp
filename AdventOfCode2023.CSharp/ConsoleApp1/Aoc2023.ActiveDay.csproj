@@ -7,15 +7,23 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="CompletedDays\inputDay01.txt" />
     <None Remove="CompletedDays\inputDay02.txt" />
     <None Remove="CompletedDays\inputDay03.txt" />
     <None Remove="CompletedDays\inputDay04.txt" />
+    <None Remove="CompletedDays\inputDay05.txt" />
     <None Remove="input.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="CompletedDays\inputDay05.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="CompletedDays\inputDay04.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

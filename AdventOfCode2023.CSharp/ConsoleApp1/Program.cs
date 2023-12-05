@@ -8,14 +8,14 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            new RunCompletedDays().RunDay05();
+
             string input = File.ReadAllText("input.txt");
 
-            //new RunCompletedDays().RunDay04();
-
             var sln = new Solution();
-            int res1 = sln.Solve1(input);
+            long res1 = sln.Solve1(input);
             //Trace.Assert(res1 == 26218);
-            int res2 = sln.Solve2(input);
+            long res2 = sln.Solve2(input);
             //Trace.Assert(res2 == 9997537);
 
         }
