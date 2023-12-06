@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using static System.Environment;
 
 namespace Aoc2023.ActiveDay
@@ -17,11 +19,15 @@ namespace Aoc2023.ActiveDay
 
         public long Solve1(string input)
         {
+            //var lns = SplitToLines(input);
+
             return 0;
         }
 
         public long Solve2(string input)
         {
+            //var lns = SplitToLines(input);
+
             return 0;
         }
     }

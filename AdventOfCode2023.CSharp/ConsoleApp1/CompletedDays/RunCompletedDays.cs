@@ -63,5 +63,16 @@ namespace Aoc2023.ActiveDay.CompletedDays
             long res2 = sln.Solve2(input);
             Trace.Assert(res2 == 52210644L);
         }
+
+        public void RunDay06()
+        {
+            string input = File.ReadAllText("CompletedDays/inputDay06.txt");
+
+            var sln = new SolutionDay06();
+            long res1 = sln.Solve1(input);
+            Trace.Assert(res1 == 505494L);
+            long res2 = sln.Solve2(input);
+            Trace.Assert(res2 == 23632299L);
+        }
     }
 }

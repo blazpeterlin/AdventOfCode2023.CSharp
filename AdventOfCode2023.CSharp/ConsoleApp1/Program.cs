@@ -8,7 +8,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            new RunCompletedDays().RunDay05();
+            new RunCompletedDays().RunDay06();
 
             string input = File.ReadAllText("input.txt");
 
