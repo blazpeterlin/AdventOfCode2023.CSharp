@@ -1,5 +1,4 @@
 ﻿using Aoc2023.ActiveDay;
-using Aoc2023.ActiveDay.CompletedDays;
 using System.Diagnostics;
 
 namespace ConsoleApp1
@@ -8,7 +7,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            new RunCompletedDays().RunDay06();
+            new Aoc2023.ActiveDay.CompletedDays.RunCompletedDays().RunDay07();
 
             string input = File.ReadAllText("input.txt");
 
