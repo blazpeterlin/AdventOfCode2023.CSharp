@@ -7,7 +7,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            //new Aoc2023.ActiveDay.CompletedDays.RunCompletedDays().RunDay10();
+            //new Aoc2023.ActiveDay.CompletedDays.RunCompletedDays().RunDay11();
 
             string input = File.ReadAllText("input.txt");
 
