@@ -23,11 +23,15 @@
     <None Remove="CompletedDays\inputDay09.txt" />
     <None Remove="CompletedDays\inputDay10.txt" />
     <None Remove="CompletedDays\inputDay11.txt" />
+    <None Remove="CompletedDays\inputDay12.txt" />
     <None Remove="input.txt" />
     <None Remove="output.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="CompletedDays\inputDay12.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="CompletedDays\inputDay11.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -7,12 +7,12 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            //new Aoc2023.ActiveDay.CompletedDays.RunCompletedDays().RunDay11();
+            new Aoc2023.ActiveDay.CompletedDays.RunCompletedDays().RunDay12();
 
             string input = File.ReadAllText("input.txt");
 
             var sln = new Solution();
-            long res1 = sln.Solve1(input);
+            //long res1 = sln.Solve1(input);
             //Trace.Assert(res1 == 26218);
             long res2 = sln.Solve2(input);
             //Trace.Assert(res2 == 9997537);
