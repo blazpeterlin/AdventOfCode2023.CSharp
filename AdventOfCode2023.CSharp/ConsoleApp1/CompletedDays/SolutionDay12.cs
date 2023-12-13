@@ -41,7 +41,7 @@ namespace Aoc2023.ActiveDay
 
         public long Solve1(string input)
         {
-            var lns = SplitToLines(input).Select(ln => ln.Split(" ") switch { [string str, string numS] => (str.ToCharArray().ToList(), ParseNums(numS)) }).ToList();
+            var lns = SplitToLines(input).Select(ln => ln.Split(" ") switch { [string str, string numS] => (str.ToCharArray().ToList(), ParseNums(numS)), _ => throw new() }).ToList();
 
             var validArrangements =
                 lns
@@ -135,7 +135,7 @@ namespace Aoc2023.ActiveDay
 
         public long Solve2(string input)
         {
-            var lns = SplitToLines(input).Select(ln => ln.Split(" ") switch { [string str, string numS] => (str.ToCharArray().ToList(), ParseNums(numS)) }).ToList();
+            var lns = SplitToLines(input).Select(ln => ln.Split(" ") switch { [string str, string numS] => (str.ToCharArray().ToList(), ParseNums(numS)), _ => throw new() }).ToList();
 
             var validArrangements =
                 lns
