@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="FinishedDays\input-day17.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="FinishedDays\Day17.fs" />
     <Content Include="FinishedDays\input-day16.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -13,7 +17,7 @@
     <Content Include="input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Day17.fs" />
+    <Compile Include="Day18.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
