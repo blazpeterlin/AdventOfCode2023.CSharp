@@ -2,6 +2,8 @@
 
 open System.Collections.Generic
 
+type Dir = A | B
+
 let solve1 inputPath = 
     let lns = System.IO.File.ReadAllLines(inputPath) |> Seq.filter((<>)"") |> Seq.toList;
     let res = 1+1
