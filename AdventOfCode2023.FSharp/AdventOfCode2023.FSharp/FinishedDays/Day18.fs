@@ -38,6 +38,25 @@ let toPolygonPoints (listIns: Ins list) =
     ) (0L,0L)
     |> List.ofSeq
 
+let polygonArea (polygonPoints: (int64*int64) list) =
+    let innerArea =
+        polygonPoints   
+        |> List.pairwise 
+        |> List.map (fun ((x1,y1),(x2,y2)) -> 
+            x1*y2-y1*x2
+        )
+        |> List.sum
+        |> fun n -> n/2L
+    let outerArea = 
+        polygonPoints 
+        |> List.pairwise 
+        |> List.map(fun ((x1,y1),(x2,y2)) -> abs(x2-x1)+abs(y2-y1)) 
+        |> List.sum
+        |> fun n -> n/2L
+    let mysteriousOne = 1L
+    let finalArea = innerArea + outerArea + mysteriousOne
+    finalArea
+
 let solve1 inputPath = 
     let lns = System.IO.File.ReadAllLines(inputPath) |> Seq.filter((<>)"") |> Seq.toList;
 
@@ -52,18 +71,10 @@ let solve1 inputPath =
             | _ -> failwith "huh"
         )
 
-    let pp = toPolygonPoints listIns
-    let ppAreaDouble = 
-        pp 
-        |> List.pairwise 
-        |> List.map (fun ((x1,y1),(x2,y2)) -> 
-            decimal(x1*y2-y1*x2)
-        )
-        |> List.sum
-    let wallSize = listIns |> List.map(_.num) |> List.sum
-    let resAttempt2 = wallSize/2L+ int64(ppAreaDouble/2M) + 1L
+    let polygonPoints = toPolygonPoints listIns
+    let res = polygonArea polygonPoints
     
-    resAttempt2
+    res
 
 let solve2 inputPath =
     let lns = System.IO.File.ReadAllLines(inputPath) |> Seq.filter((<>)"") |> Seq.toList;
@@ -85,14 +96,6 @@ let solve2 inputPath =
         )
 
     
-    let pp = toPolygonPoints listIns
-    let ppAreaDouble = 
-        pp 
-        |> List.pairwise 
-        |> List.map (fun ((x1,y1),(x2,y2)) -> 
-            decimal(x1*y2-y1*x2)
-        )
-        |> List.sum
-    let wallSize = listIns |> List.map(_.num) |> List.sum
-    let res = wallSize/2L+ int64(ppAreaDouble/2M) + 1L
+    let polygonPoints = toPolygonPoints listIns
+    let res = polygonArea polygonPoints
     res
