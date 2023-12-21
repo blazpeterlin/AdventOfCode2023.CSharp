@@ -40,7 +40,9 @@ let parseFlowMap (input:string) =
     let flowMap = 
         lns1 
         |> Seq.map(fun ln1 -> 
-            let name :: terms = ln1.Split(splitters, System.StringSplitOptions.RemoveEmptyEntries) |> List.ofArray
+            
+            let split = ln1.Split(splitters, System.StringSplitOptions.RemoveEmptyEntries) |> List.ofArray
+            let (name, terms) = match split with | [] -> failwith "huh" | name :: terms -> name,terms
             
             let flow0 = { name=name; terms=[]; }
             
