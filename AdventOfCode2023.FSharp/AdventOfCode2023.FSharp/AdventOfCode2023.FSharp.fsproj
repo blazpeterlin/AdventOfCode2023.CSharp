@@ -6,34 +6,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="FinishedDays\input-day22.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="FinishedDays\Day22.fs" />
     <Content Include="FinishedDays\input-day21.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="FinishedDays\Day21.fs" />
-    <Compile Include="FinishedDays\Day20.fs" />
+    <None Include="FinishedDays\Day21.fs" />
+    <None Include="FinishedDays\Day20.fs" />
     <Content Include="FinishedDays\input-day20.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="FinishedDays\input-day19.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="FinishedDays\Day19.fs" />
+    <None Include="FinishedDays\Day19.fs" />
     <Content Include="FinishedDays\input-day18.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="FinishedDays\Day18.fs" />
+    <None Include="FinishedDays\Day18.fs" />
     <Content Include="FinishedDays\input-day17.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="FinishedDays\Day17.fs" />
+    <None Include="FinishedDays\Day17.fs" />
     <Content Include="FinishedDays\input-day16.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="FinishedDays\Day16.fs" />
+    <None Include="FinishedDays\Day16.fs" />
     <Content Include="input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Day22.fs" />
+    <Compile Include="Day23.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

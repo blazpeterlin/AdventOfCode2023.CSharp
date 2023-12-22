@@ -4,5 +4,5 @@
 
 //let d21_result2 = Day21.solve2 26501365 "input.txt"
 
-let res1 = Day22.solve1 "input.txt"
-let res2 = Day22.solve2 "input.txt"
+let res1 = Day23.solve1 "input.txt"
+let res2 = Day23.solve2 "input.txt"
