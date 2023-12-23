@@ -1,4 +1,4 @@
-﻿module Day23
+﻿module Day24
 
 open System.Collections.Generic
 open Microsoft.FSharp.Core.Operators.Checked
