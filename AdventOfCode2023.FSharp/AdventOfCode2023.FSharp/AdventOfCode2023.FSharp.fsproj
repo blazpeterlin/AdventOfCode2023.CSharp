@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="FinishedDays\input-day25.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="FinishedDays\Day25.fs" />
     <Content Include="FinishedDays\input-day24.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -45,7 +49,7 @@
     <Content Include="input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Day25.fs" />
+    <Compile Include="ActiveDay.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
@@ -55,6 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AdventOfCode2023.CSharpHelpers\AdventOfCode2023.CSharpHelpers.csproj" />
     <ProjectReference Include="..\AdventOfCode2023.FSharp.Z3\AdventOfCode2023.FSharp.Z3.fsproj" />
   </ItemGroup>
 

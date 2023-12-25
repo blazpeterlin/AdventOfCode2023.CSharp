@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "AdventOfCode2023.FSharp", "AdventOfCode2023.FSharp\AdventOfCode2023.FSharp.fsproj", "{14315197-E80C-4814-AC1A-47C4E2FA5241}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "AdventOfCode2023.FSharp.Z3", "AdventOfCode2023.FSharp.Z3\AdventOfCode2023.FSharp.Z3.fsproj", "{93B9A8DC-6526-4452-9357-74D56ABEFD67}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "AdventOfCode2023.FSharp.Z3", "AdventOfCode2023.FSharp.Z3\AdventOfCode2023.FSharp.Z3.fsproj", "{93B9A8DC-6526-4452-9357-74D56ABEFD67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2023.CSharpHelpers", "AdventOfCode2023.CSharpHelpers\AdventOfCode2023.CSharpHelpers.csproj", "{5DA0C9EC-79E0-4B50-8CF6-DC4FEA86AF22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{93B9A8DC-6526-4452-9357-74D56ABEFD67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93B9A8DC-6526-4452-9357-74D56ABEFD67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93B9A8DC-6526-4452-9357-74D56ABEFD67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DA0C9EC-79E0-4B50-8CF6-DC4FEA86AF22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DA0C9EC-79E0-4B50-8CF6-DC4FEA86AF22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DA0C9EC-79E0-4B50-8CF6-DC4FEA86AF22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DA0C9EC-79E0-4B50-8CF6-DC4FEA86AF22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

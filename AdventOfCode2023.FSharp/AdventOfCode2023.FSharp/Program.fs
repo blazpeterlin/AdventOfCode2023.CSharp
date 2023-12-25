@@ -6,5 +6,5 @@
 
 //let d24res2 = Day24.solve2 "FinishedDays\\input-day24.txt"
 
-let res1 = Day25.solve1 "input.txt"
-let res2 = Day25.solve2 "input.txt"
+let res1 = Day24.solve1 "input.txt"
+let res2 = Day24.solve2 "input.txt"
